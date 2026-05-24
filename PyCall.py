@@ -13,7 +13,7 @@ from datetime import datetime
 
 
 # Define file paths
-file_path = r"Y:\CallingMachine\Calling.xlsx"
+file_path = r"Calling.xlsx"
 excel_path = r"C:\Program Files\Microsoft Office\Office16\EXCEL.EXE"
 
 alice_logo = r"""
