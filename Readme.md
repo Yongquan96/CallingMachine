@@ -1,35 +1,85 @@
-# ALICE Lite - Automated Dialer
+# ALICE Lite
 
-ALICE Lite is a Python-based automated dialing assistant designed for BizPhone running on LDPlayer.
-It helps automate outbound calling workflows by reading phone numbers from Excel, dialing automatically, updating statuses, logging dates, and recording remarks.
+### Automated Calling Assistant
+
+ALICE Lite is a Python-based outbound calling automation system designed for:
+
+* BizPhone (LDPlayer)
+* Zentrex
+
+It automates:
+
+* outbound dialing
+* lead management
+* call disposition logging
+* follow-up tracking
+* remarks entry
+
+using Excel as a lightweight CRM.
 
 ---
 
 # Features
 
-* Automated dialing through BizPhone (LDPlayer)
-* Reads phone numbers directly from Excel
-* Automatically skips completed leads
-* Redial previous number using `prev`
-* End current call instantly using `\`
-* Quick status shortcuts:
+## Core Features
 
-  * `NI` → Not Interested
-  * `FU` → Follow Up
-* Automatically logs:
+* Automated outbound dialing
+* Excel lead management
+* Auto status logging
+* Follow-up remarks tracking
+* Date logging
+* Redial previous contact
+* Pause / Resume support
+* Multi-platform dialer support
 
-  * Call status
-  * Date
-  * Remarks
-* Auto-switches between LDPlayer and Python terminal
-* Supports follow-up remarks entry
-* Minimalist console startup logo
+---
+
+# Supported Dialers
+
+| Dialer   | Support |
+| -------- | ------- |
+| BizPhone | ✅       |
+| Zentrex  | ✅       |
+
+---
+
+# Project Structure
+
+```text
+ALICE/
+│
+├── main.py
+├── bizphone.py
+├── zentrex.py
+├── utils.py
+├── Calling.xlsx
+├── requirements.txt
+└── README.md
+```
+
+---
+
+# How It Works
+
+## Workflow
+
+```text
+Press .
+↓
+Switch to Dialer
+↓
+Dial Number
+↓
+Switch Back to Terminal
+↓
+Enter Call Status
+↓
+Update Excel
+```
 
 ---
 
 # Excel Format
-
-Your Excel file should follow this structure:
 
 | Column | Description  |
 | ------ | ------------ |
@@ -40,56 +90,74 @@ Your Excel file should follow this structure:
 
 Example:
 
-| Phone Number | Status    | Date       | Remarks             |
-| ------------ | --------- | ---------- | ------------------- |
-| 91234567     | Follow Up | 24/05/2026 | Call back next week |
-| 98765432     | DNC       | 24/05/2026 |                     |
+| Phone Number | Status    | Date       | Remarks               |
+| ------------ | --------- | ---------- | --------------------- |
+| 91234567     | Follow Up | 24/05/2026 | Call back next Monday |
+| 98765432     | DNC       | 24/05/2026 |                       |
 
 ---
 
-# Requirements
+# Installation
 
-Install the required Python libraries:
+## 1. Install Python
+
+Download Python:
+
+* https://www.python.org/downloads/
+
+IMPORTANT:
+Enable:
+
+```text
+Add Python to PATH
+```
+
+during installation.
+
+---
+
+# Install Required Libraries
 
 ```bash
 pip install pyautogui openpyxl pygetwindow pynput psutil
 ```
 
----
-
-# How To Run
-
-## 1. Open LDPlayer
-
-Launch LDPlayer and open BizPhone.
-
-## 2. Prepare Excel File
-
-Ensure your Excel file exists at:
-
-```python
-FILE_PATH = r"C:\Users\Lenovo\OneDrive\Prudential\Leads\LeadsAuto.xlsx"
-```
-
-Update the path if necessary.
-
----
-
-## 3. Run The Script
+Optional:
 
 ```bash
-python PyCall.py
+pip install pyperclip
 ```
+
+---
+
+# Running ALICE
+
+```bash
+python main.py
+```
+
+---
+
+# Dialer Selection
+
+When ALICE starts:
+
+```text
+1. BizPhone
+2. Zentrex
+```
+
+Select the dialer you want to use.
 
 ---
 
 # Controls
 
-| Key   | Function         |
-| ----- | ---------------- |
-| `.`   | Call next number |
-| `\\`  | End current call |
-| `Esc` | Pause / Resume   |
+| Key | Function         |
+| --- | ---------------- |
+| .   | Call next number |
+| \   | End current call |
+| Esc | Pause / Resume   |
 
 ---
 
@@ -108,40 +176,31 @@ python PyCall.py
 
 ---
 
-# Workflow
+# Zentrex Automation
 
-1. Press `.` to call the next number
-2. ALICE automatically:
+ALICE Z uses:
 
-   * Ends previous call
-   * Clears numpad
-   * Dials next lead
-3. Enter call status
-4. If status is:
+* keyboard automation
+* textbox detection
+* auto window switching
 
-   * `FU`
-   * `Appt`
+Workflow:
 
-   ALICE will request remarks
-5. Excel updates automatically
+1. Focus Zentrex
+2. Focus phone textbox
+3. Clear previous number
+4. Type new number
+5. Press Enter to call
 
 ---
 
-# Example
+# BizPhone Automation
 
-```text
-Calling: 91234567
-Switched to BizPhone.
-Dialed: 91234567
+ALICE Lite for BizPhone:
 
-Enter call status:
-FU
-
-Enter remarks:
-Call back next Monday
-
-Row updated successfully.
-```
+* works through LDPlayer
+* uses keypad automation
+* supports auto dialing through emulator
 
 ---
 
@@ -156,10 +215,10 @@ pip install pyinstaller
 Build executable:
 
 ```bash
-pyinstaller --onefile PyCall.py
+pyinstaller --onefile main.py
 ```
 
-Your executable will appear in:
+Executable output:
 
 ```text
 dist/
@@ -167,21 +226,47 @@ dist/
 
 ---
 
+# Current Limitations
+
+## Windows Focused
+
+Current version is optimized for Windows.
+
+### Fully Supported
+
+* Windows 10
+* Windows 11
+
+### Partial Support
+
+* macOS
+* Linux
+
+---
+
 # Future Improvements
 
-* Voice detection
-* Auto voicemail detection
+* GUI launcher
+* SQLite database
 * CRM integration
-* GUI version
-* Statistics dashboard
-* Auto scheduling
+* OCR call detection
+* Voice transcription
+* AI summarization
+* Call analytics dashboard
+* Browser automation
+* Cloud sync
 
 ---
 
 # Disclaimer
 
-This project is intended for personal productivity and workflow automation purposes only.
-Please ensure compliance with your local calling regulations and company policies.
+This software is intended for workflow automation and productivity purposes only.
+
+Users are responsible for complying with:
+
+* local telemarketing laws
+* DNC regulations
+* company compliance policies
 
 ---
 
@@ -189,4 +274,4 @@ Please ensure compliance with your local calling regulations and company policie
 
 Created by Josh Soh
 
-ALICE Lite © 2025
+ALICE Lite © 2026
