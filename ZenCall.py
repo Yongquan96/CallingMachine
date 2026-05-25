@@ -173,14 +173,29 @@ def end_call():
 
     switch_to_zentrex()
 
-    time.sleep(0.3)
+    time.sleep(0.5)
 
-    # Example
-    pyautogui.press('esc')
+    active_window = gw.getActiveWindow()
 
-    print("Call ended.")
+    if active_window:
+
+        # Calculate dynamic button position
+        end_x = active_window.left + active_window.width - 70
+
+        # Near bottom of window
+        end_y = active_window.top + active_window.height - 90
+
+        pyautogui.click(end_x, end_y)
+
+        print("Call ended.")
+
+    else:
+        print("Zentrex window not active.")
+
+    time.sleep(0.5)
 
     switch_to_terminal()
+
 
 # Function to handle calls
 def handle_call():
