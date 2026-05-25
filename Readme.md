@@ -48,8 +48,8 @@ using Excel as a lightweight CRM.
 ```text
 ALICE/
 │
-├── bizphone.py
-├── zentrex.py
+├── PyCall.py
+├── ZenCall.py
 ├── Calling.xlsx
 └── README.md
 ```
