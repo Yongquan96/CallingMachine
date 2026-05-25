@@ -16,19 +16,21 @@ from datetime import datetime
 file_path = r"Calling.xlsx"
 excel_path = r"C:\Program Files\Microsoft Office\Office16\EXCEL.EXE"
 
-alice_logo = r"""
- █████  ██      ██  ██████  ███████  
-██   ██ ██      ██ ██       ██       
-███████ ██      ██ ██       █████    
-██   ██ ██      ██ ██       ██       
-██   ██ ███████ ██  ██████  ███████  LITE
+ZCaller_logo = r"""
+
+███████╗ ██████╗ █████╗ ██╗     ██╗     
+╚══███╔╝██╔════╝██╔══██╗██║     ██║     
+  ███╔╝ ██║     ███████║██║     ██║     
+ ███╔╝  ██║     ██╔══██║██║     ██║     
+███████╗╚██████╗██║  ██║███████╗███████╗
+╚══════╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚══════╝ LITE
 -------------------------------------
      A u t o m a t e d  D i a l e r  for Zentrex
 """
 
 def show_startup_logo():
-    print(alice_logo)  # Cyan color text
-    print("Initializing ALICE...\n")
+    print(ZCaller_logo)  # Cyan color text
+    print("Initializing ZCall Lite...\n")
     time.sleep(2)  # Pause for effect
 
 show_startup_logo()
@@ -72,7 +74,7 @@ def switch_to_zentrex():
 def switch_to_terminal():
     # Switch back to Python script terminal
     try:
-        possible_titles = ["Python", "cmd", "Windows Terminal", "PowerShell","py.exe"]
+        possible_titles = ["Python", "cmd", "Windows Terminal", "PowerShell","py.exe","ZCall Lite"]
         python_windows = [w for w in gw.getAllWindows() if any(title in w.title for title in possible_titles)]
 
         if python_windows:
