@@ -48,12 +48,9 @@ using Excel as a lightweight CRM.
 ```text
 ALICE/
 │
-├── main.py
 ├── bizphone.py
 ├── zentrex.py
-├── utils.py
 ├── Calling.xlsx
-├── requirements.txt
 └── README.md
 ```
 
