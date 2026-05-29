@@ -74,7 +74,7 @@ def switch_to_zentrex():
 def switch_to_terminal():
     # Switch back to Python script terminal
     try:
-        possible_titles = ["Python", "cmd", "Windows Terminal", "PowerShell","py.exe","ZCall Lite"]
+        possible_titles = ["Python", "cmd", "Windows Terminal", "PowerShell","py.exe","ZCall Lite","ZenCall.py"]
         python_windows = [w for w in gw.getAllWindows() if any(title in w.title for title in possible_titles)]
 
         if python_windows:
@@ -171,7 +171,7 @@ def close_excel():
             except Exception as e:
                 print(f"Error closing Excel process: {e}")
 
-def end_call():
+def end_call(side):
 
     switch_to_zentrex()
 
@@ -180,14 +180,22 @@ def end_call():
     active_window = gw.getActiveWindow()
 
     if active_window:
-
-        # Calculate dynamic button position
-        end_x = active_window.left + active_window.width - 70
+        
+        if(side)=="\\":
+            # Calculate dynamic button position
+            end_x = active_window.left + active_window.width - 50
+        elif(side)=="]":
+            # Calculate dynamic button position
+            end_x = active_window.left + active_window.width - 160
 
         # Near bottom of window
         end_y = active_window.top + active_window.height - 90
 
         pyautogui.click(end_x, end_y)
+        
+        time.sleep(0.5)
+	
+        #pyautogui.click(end_xi, end_y)
 
         print("Call ended.")
 
@@ -226,7 +234,7 @@ def handle_call():
         call_status = status_mapping.get(call_status, call_status)  # Convert shortcut to full status
 
         if call_status.lower() == "dc":
-            end_call()  # End call in BizPhone
+            end_call("\\")  # End call in BizPhone
             print("Call ended. Enter status:")
             continue  
 
@@ -255,9 +263,13 @@ def on_press(key):
     try:
         if key.char == '\\':  # Press "\" to manually end call
             print("Ending call in Zentrex...")
-            end_call()
+            end_call("\\")
             print("Call ended. You can now enter status or make another call.")
-
+            
+        elif key.char == ']':  # Press "." to dial numbers in sequence
+            print("Ending call in Zentrex...")
+            end_call("]")
+            print("Call ended. You can now enter status or make another call.")
         elif key.char == '.':  # Press "." to dial numbers in sequence
             if paused:
                 print("Script is paused. Press Esc to resume.")
